@@ -12,6 +12,7 @@ public class OCRTest {
 		word.open();
 		word.window().wait(2.0);
 		
+		SikuliXUtils.findAndClickRegionByText("Blank document", screen);
 		
 		
 	}

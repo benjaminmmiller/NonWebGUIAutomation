@@ -34,11 +34,11 @@ public class SikuliXUtils {
 		System.out.println("Screenshot has been taken and saved to: "+SikuliXFileDirectories.getOutputImagePath());
 	}
 	
-	public static List<Match> findAllMatchesforPattern(String patternImage, Screen screen){
+	public static List<Match> findAllMatchesforPattern(String patternImage, Region region){
 		Pattern pattern = new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\"+patternImage);
 		List <Match> matches = new ArrayList<Match>();
 		try {
-			Iterator<Match> matchesFound = screen.findAll(pattern);
+			Iterator<Match> matchesFound = region.findAll(pattern);
 			matches = MiscUtils.iteratorToList(matchesFound);
 		} catch (FindFailed e) {
 			// TODO Auto-generated catch block
@@ -47,10 +47,10 @@ public class SikuliXUtils {
 		return matches;
 	}
 	
-	public static Pattern typeTextForPattern(String imageName, String fieldText, Screen screen) {
+	public static Pattern typeTextForPattern(String imageName, String fieldText, Region region) {
 		Pattern fieldPattern = new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\"+imageName);
 		try {
-			screen.type(fieldPattern, fieldText);
+			region.type(fieldPattern, fieldText);
 		} catch (FindFailed e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,33 +59,21 @@ public class SikuliXUtils {
 	}
 	
 	
-	public static Match findAndClickRegionByText(String text, Screen screen) {
+	public static Match findAndClickRegionByText(String text, Region region) {
 		Match match = new Match();
 		try {
-			match = screen.findText(text);
-			screen.click(match);
+			match = region.findText(text);
+			region.click(match);
 		} catch (FindFailed e) {
 			e.printStackTrace();
 		}
 		return match;
 	}
 	
-	public static Match findAndClickRegionByText(String text, Screen screen, App app) {
-		Match match = new Match();
-		try {
-			match = app.window().findText(text);
-			screen.click(match);
-		} catch (FindFailed e) {
-			e.printStackTrace();
-		}
-		return match;
-	}
-	
-
-	public static boolean textExistsInWindow(String text, Screen screen, App app) {
+	public static boolean textExistsInWindow(String text, Region region) {
 		OCR.globalOptions().fontSize(60);
 		String textFound = "";
-		textFound = app.window().text();
+		textFound = region.text();
 		System.out.println("Original Text");
 		System.out.println(textFound);
 		textFound = textFound.replaceAll("\n+", " ");
@@ -104,27 +92,27 @@ public class SikuliXUtils {
 		}
 	}
 	
-	public static void maximizeWindowsWindow(App app) {
-		app.window().keyDown(Key.WIN);
-		app.window().type(Key.UP);
-		app.window().keyUp(Key.WIN);
+	public static void maximizeWindowsWindow(Region region) {
+		region.keyDown(Key.WIN);
+		region.type(Key.UP);
+		region.keyUp(Key.WIN);
 	}
 	
-	public static void waitForScreen(String imageScreen, int maxWaitTime, Screen screen) {
+	public static void waitForScreen(String imageScreen, int maxWaitTime, Region region) {
 		Pattern pattern= new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\"+imageScreen);
 		try {
-			screen.wait(pattern, maxWaitTime);
+			region.wait(pattern, maxWaitTime);
 		} catch (FindFailed e) {
-			System.out.println(screen);
+			System.out.println(region);
 			e.printStackTrace();
 		}
 		System.out.println("Screen Found");
 	}
 	
 	
-	public static Match findClosestPatternToRegion(Region region, String imageName, Screen screen) {
+	public static Match findClosestPatternToRegion(Region region, String imageName, Region screenOrAppRegion) {
 		Match closestMatch = new Match();
-		List<Match> matches = findAllMatchesforPattern(imageName, screen);
+		List<Match> matches = findAllMatchesforPattern(imageName, screenOrAppRegion);
 		Location regionLocation = region.getCenter();
 		for(int i=0;i<matches.size();i++) {
 			if(i==0) {
@@ -172,23 +160,23 @@ public class SikuliXUtils {
 	}
 	
 	
-	public static Match scrollAndLookForText(String searchForText, int maxScrolls, App app) {
-		app.window().keyDown(Keys.CTRL);
-		app.window().type(Key.HOME);
-		app.window().keyUp(Keys.CTRL);
+	public static Match scrollAndLookForText(String searchForText, int maxScrolls, Region region) {
+		region.keyDown(Keys.CTRL);
+		region.type(Key.HOME);
+		region.keyUp(Keys.CTRL);
 		
 		Match textFound = null;
 		for(int i=0;i<maxScrolls;i++) {
-			app.window().wait(0.5);
+			region.wait(0.5);
 			try {
-				textFound = app.window().findText(searchForText);
+				textFound = region.findText(searchForText);
 			} catch (FindFailed e) {
 				System.out.println("Text not found. Continuing page scroll.");
 			}
 			if(textFound!=null) {
 				return textFound;
 			}
-			app.window().type(Key.PAGE_DOWN);
+			region.type(Key.PAGE_DOWN);
 		}
 		if(textFound==null) {
 			System.out.println("No text was found while scrolling");
