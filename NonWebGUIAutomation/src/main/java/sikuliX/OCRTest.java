@@ -32,7 +32,7 @@ public class OCRTest {
 	public void frenchTest(){
 		//Change the language to French
 		//Need to include French trained data in SikuliX directory (User)\AppData\Roaming\Sikulix\SikulixTesseract\tessdata
-		// Trained data found from https://github.com/tesseract-ocr/tessdata
+		//Trained data found from https://github.com/tesseract-ocr/tessdata
 		Settings.OcrLanguage = "fra";
 		try {
 			testText(dummyParagraphFR);
