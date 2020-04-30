@@ -15,15 +15,15 @@ public class SikuliXFileDirectories {
 		return imagesFolderPath;
 	}
 	public static String getOutputImagePath() {
-		TestingFrameworkFileUtils.createDirectory(outputImagePath, true);
+		TestingFrameworkFileUtils.createDirectory(outputImagePath, false);
 		return outputImagePath;
 	}
 	public static String getOutputDynamicImagePath() {
-		TestingFrameworkFileUtils.createDirectory(outputDynamicImagePath, true);
+		TestingFrameworkFileUtils.createDirectory(outputDynamicImagePath, false);
 		return outputDynamicImagePath;
 	}
 	public static String getOutputTextPath() {
-		TestingFrameworkFileUtils.createDirectory(outputTextPath, true);
+		TestingFrameworkFileUtils.createDirectory(outputTextPath, false);
 		return outputTextPath;
 	}
 	

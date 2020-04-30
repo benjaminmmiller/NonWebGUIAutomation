@@ -2,6 +2,9 @@ package sikuliX;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -197,5 +200,28 @@ public class SikuliXUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void multikey(String holdKey, String pressKey, Region region) {
+		region.keyDown(holdKey);
+		region.type(pressKey);
+		region.keyUp(holdKey);
+	}
+	
+	public static void multikey(List<String> holdKeys, String pressKey, Region region) {
+		for(String holdKey:holdKeys) {
+			region.keyDown(holdKey);
+		}
+		region.type(pressKey);
+		for(String holdKey:holdKeys) {
+			region.keyUp(holdKey);
+		}
+	}
+	
+	public static void pasteText(String textToPaste, Region region) {
+		StringSelection stringSelection = new StringSelection(textToPaste);
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(stringSelection, null);
+		multikey(Key.CTRL, "v", region);
 	}
 }

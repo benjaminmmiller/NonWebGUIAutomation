@@ -36,7 +36,7 @@ public class ScrollTesting {
 			word.window().type(Keys.ENTER);
 		}
 		
-		Match scrollMatch = SikuliXUtils.scrollAndLookForText("Banking Test Org", 3, word.window());
+		Match scrollMatch = SikuliXUtils.scrollAndLookForText("John Smith", 3, word.window());
 		scrollMatch.click();
 	}
 
