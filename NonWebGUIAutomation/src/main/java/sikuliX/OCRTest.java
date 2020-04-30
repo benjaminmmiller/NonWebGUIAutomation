@@ -11,7 +11,7 @@ public class OCRTest {
 		App word = new App("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
 		word.open();
 		word.window().wait(2.0);
-		word.close();
+		
 		
 		
 	}
