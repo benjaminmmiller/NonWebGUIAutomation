@@ -23,12 +23,12 @@ public class DynamicImageGeneration {
 	@Test
 	public void dynamicImageTest() throws FindFailed {
 		String firstName = "John Smith";
-		DynamicImage firstNameImage = new DynamicImage.DynamicImageBuilder(SikuliXUtils.imagesFolderPath+"\\FirstName.PNG")
+		DynamicImage firstNameImage = new DynamicImage.DynamicImageBuilder(SikuliXFileDirectories.getImagesFolderPath()+"\\FirstName.PNG")
 				.text(firstName)
 				.textLocation(new Point(90,21))
 				.build();
 		
-		File firstNameFile = firstNameImage.writeImage(firstNameImage.generateImage(), SikuliXUtils.outputDynamicImagePath+"\\Test.png");
+		File firstNameFile = firstNameImage.writeImage(firstNameImage.generateImage(), SikuliXFileDirectories.getOutputDynamicImagePath()+"\\Test.png");
 		
 		WebDriver wd = new FirefoxDriver();
 		wd.get("http://newtours.demoaut.com/mercurywelcome.php");
@@ -36,11 +36,11 @@ public class DynamicImageGeneration {
 		
 		Region wdRegion = SikuliXUtils.webDriverRegion(wd);
 		
-		Pattern registerButton = new Pattern(SikuliXUtils.imagesFolderPath+"\\RegisterButton.PNG");
+		Pattern registerButton = new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\RegisterButton.PNG");
 		wdRegion.click(registerButton);
 		
 		
-		Pattern firstNameField = new Pattern(SikuliXUtils.imagesFolderPath+"\\FirstName.PNG");
+		Pattern firstNameField = new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\FirstName.PNG");
 		wdRegion.click(firstNameField);
 		
 		wdRegion.type(firstName);

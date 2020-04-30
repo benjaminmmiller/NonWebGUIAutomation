@@ -38,7 +38,7 @@ public class SikuliX {
 		Region wdRegion = SikuliXUtils.webDriverRegion(wd);
 		
 		
-		Pattern registerButton = new Pattern(SikuliXUtils.imagesFolderPath+"\\RegisterButton.PNG");
+		Pattern registerButton = new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\RegisterButton.PNG");
 		try {
 			wdRegion.click(registerButton);
 		} catch (FindFailed e) {

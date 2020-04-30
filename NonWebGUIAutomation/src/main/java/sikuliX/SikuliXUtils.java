@@ -25,20 +25,17 @@ import utils.MiscUtils;
 import utils.TestingFrameworkFileUtils;
 
 public class SikuliXUtils {
-	final static String imagesFolderPath = TestingFrameworkFileUtils.getProjectFilePath() +"\\src\\main\\resources\\images";
-	final static String outputImagePath = TestingFrameworkFileUtils.getProjectFilePath() + "\\test-output\\screenshots";
-	final static String outputDynamicImagePath = TestingFrameworkFileUtils.getProjectFilePath() + "\\src\\main\\resources\\dynamic-images";
-	final static String outputTextPath = TestingFrameworkFileUtils.getProjectFilePath() + "\\test-output\\textFiles";
+	
 	
 	
 	public static void takeAndSaveScreenshot(Region region, Screen screen) {
 		ScreenImage screenshot = screen.capture(region);
-		screenshot.save(outputImagePath);
-		System.out.println("Screenshot has been taken and saved to: "+outputImagePath);
+		screenshot.save(SikuliXFileDirectories.getOutputImagePath());
+		System.out.println("Screenshot has been taken and saved to: "+SikuliXFileDirectories.getOutputImagePath());
 	}
 	
 	public static List<Match> findAllMatchesforPattern(String patternImage, Screen screen){
-		Pattern pattern = new Pattern(imagesFolderPath+"\\"+patternImage);
+		Pattern pattern = new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\"+patternImage);
 		List <Match> matches = new ArrayList<Match>();
 		try {
 			Iterator<Match> matchesFound = screen.findAll(pattern);
@@ -51,7 +48,7 @@ public class SikuliXUtils {
 	}
 	
 	public static Pattern typeTextForPattern(String imageName, String fieldText, Screen screen) {
-		Pattern fieldPattern = new Pattern(imagesFolderPath+"\\"+imageName);
+		Pattern fieldPattern = new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\"+imageName);
 		try {
 			screen.type(fieldPattern, fieldText);
 		} catch (FindFailed e) {
@@ -114,7 +111,7 @@ public class SikuliXUtils {
 	}
 	
 	public static void waitForScreen(String imageScreen, int maxWaitTime, Screen screen) {
-		Pattern pattern= new Pattern(SikuliX.imagesFolderPath+"\\"+imageScreen);
+		Pattern pattern= new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\"+imageScreen);
 		try {
 			screen.wait(pattern, maxWaitTime);
 		} catch (FindFailed e) {
