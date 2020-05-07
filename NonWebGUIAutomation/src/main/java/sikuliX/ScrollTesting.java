@@ -3,6 +3,7 @@ package sikuliX;
 import org.sikuli.basics.Settings;
 import org.sikuli.hotkey.Keys;
 import org.sikuli.script.App;
+import org.sikuli.script.FindFailed;
 import org.sikuli.script.Match;
 import org.sikuli.script.OCR;
 import org.sikuli.script.Screen;
@@ -12,11 +13,14 @@ import utils.TestingFrameworkFileUtils;
 public class ScrollTesting {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		testTextScroll();
+	}
+
+	public static void testTextScroll() {
 		Settings.TypeDelay = 0.0;
 		
 		Screen screen = new Screen();
-		App word = new App("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
+		App word = new App("C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
 		word.open();
 		
 		SikuliXUtils.findAndClickRegionByText("Blank Document", word.window());
@@ -24,9 +28,7 @@ public class ScrollTesting {
 		
 		OCR.globalOptions().fontSize(3);
 		
-		word.window().type("Banking Test Org");
-		
-		System.out.println(word.window().text());
+		word.window().type("Mary Sue");
 		
 		for(int i=0;i<25;i++) {
 			word.window().type(Keys.ENTER);
@@ -39,5 +41,7 @@ public class ScrollTesting {
 		Match scrollMatch = SikuliXUtils.scrollAndLookForText("John Smith", 3, word.window());
 		scrollMatch.click();
 	}
-
+	
+	
+	
 }

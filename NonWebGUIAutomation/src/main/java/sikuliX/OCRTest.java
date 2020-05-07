@@ -44,9 +44,11 @@ public class OCRTest {
 	
 	
 	private void testText(String testText) throws FindFailed{
-		Screen screen = new Screen();
-		App word = new App("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
+		
+		App word = new App("C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
 		word.open();
+		
+		
 		
 		SikuliXUtils.findAndClickRegionByText("Blank document", word.window());
 		word.window().wait(1.0);

@@ -101,16 +101,18 @@ public class SikuliXUtils {
 		region.keyUp(Key.WIN);
 	}
 	
-	public static void waitForScreen(String imageScreen, int maxWaitTime, Region region) {
-		Pattern pattern= new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\"+imageScreen);
+	public static boolean waitForScreen(String imageFilename, int maxWaitTime, Region region) {
+		Pattern pattern= new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\"+imageFilename);
 		try {
 			region.wait(pattern, maxWaitTime);
+			System.out.println("Screen found. Returning true");
+			return true;
 		} catch (FindFailed e) {
-			System.out.println(region);
-			e.printStackTrace();
+			System.out.println("No screen has been found. Returning false.");
+			return false;
 		}
-		System.out.println("Screen Found");
 	}
+
 	
 	
 	public static Match findClosestPatternToRegion(Region region, String imageName, Region screenOrAppRegion) {
@@ -164,29 +166,30 @@ public class SikuliXUtils {
 	
 	
 	public static Match scrollAndLookForText(String searchForText, int maxScrolls, Region region) {
+		//Using CTRL+HOME to go to the top of the page
 		region.keyDown(Keys.CTRL);
 		region.type(Key.HOME);
 		region.keyUp(Keys.CTRL);
 		
-		Match textFound = null;
+		Match textFound = new Match();
 		for(int i=0;i<maxScrolls;i++) {
+			//Wait a bit for the scroll to happen
 			region.wait(0.5);
 			try {
 				textFound = region.findText(searchForText);
+				return textFound;
 			} catch (FindFailed e) {
 				System.out.println("Text not found. Continuing page scroll.");
 			}
-			if(textFound!=null) {
-				return textFound;
-			}
+			//Use the Page Down key to scroll down
 			region.type(Key.PAGE_DOWN);
 		}
-		if(textFound==null) {
-			System.out.println("No text was found while scrolling");
-			textFound= new Match();
-		}
+		System.out.println("No text was found while scrolling");
 		return textFound;
 	}
+	
+	
+	
 	
 	public static void fillTextField(String textFieldLabel, String value, Screen screen) {
 		Match match = new Match();
@@ -222,6 +225,6 @@ public class SikuliXUtils {
 		StringSelection stringSelection = new StringSelection(textToPaste);
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(stringSelection, null);
-		multikey(Key.CTRL, "v", region);
+		SikuliXUtils.multikey(Key.CTRL, "v", region);
 	}
 }

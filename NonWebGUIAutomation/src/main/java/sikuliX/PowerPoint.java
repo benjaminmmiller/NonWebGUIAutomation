@@ -29,7 +29,7 @@ public class PowerPoint {
 	public static void powerpointTest() {
 		Settings.TypeDelay = 0.0;
 		Screen screen = new Screen();
-		App powerpoint = new App("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE");
+		App powerpoint = new App("C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE");
 		powerpoint.open();
 		
 		SikuliXUtils.findAndClickRegionByText("Blank Presentation", powerpoint.window());

@@ -28,13 +28,6 @@
 	</dependency>
 	
 	<dependency>
-	    <groupId>net.sourceforge.tess4j</groupId>
-	    <artifactId>tess4j</artifactId>
-	    <version>4.5.1</version>
-	</dependency>
-	
-	
-	<dependency>
 		 <groupId>automation</groupId>
 		 <artifactId>AutomationFramework</artifactId>
 		 <version>0.0.1-SNAPSHOT</version>
