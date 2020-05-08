@@ -29,8 +29,6 @@ import utils.TestingFrameworkFileUtils;
 
 public class SikuliXUtils {
 	
-	
-	
 	public static void takeAndSaveScreenshot(Region region, Screen screen) {
 		ScreenImage screenshot = screen.capture(region);
 		screenshot.save(SikuliXFileDirectories.getOutputImagePath());
@@ -44,7 +42,7 @@ public class SikuliXUtils {
 			Iterator<Match> matchesFound = region.findAll(pattern);
 			matches = MiscUtils.iteratorToList(matchesFound);
 		} catch (FindFailed e) {
-			// TODO Auto-generated catch block
+			System.out.println("No matches were found for pattern. Returning empty list.");
 			e.printStackTrace();
 		}
 		return matches;
@@ -188,22 +186,51 @@ public class SikuliXUtils {
 		return textFound;
 	}
 	
-	
-	
-	
-	public static void fillTextField(String textFieldLabel, String value, Screen screen) {
-		Match match = new Match();
-		try {
-			OCR.globalOptions().fontSize(5);
-			match = screen.findText(textFieldLabel);
-			match.click();
-			SikuliXUtils.findClosestPatternToRegion(match, "TextBox.PNG", screen).click();
-			screen.type(value);
-		} catch (FindFailed e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static Match scrollAndLookForPattern(String patternFilename, int maxScrolls, Region region) {
+		//Using CTRL+HOME to go to the top of the page
+		region.keyDown(Keys.CTRL);
+		region.type(Key.HOME);
+		region.keyUp(Keys.CTRL);
+		
+		Match patternFound = new Match();
+		for(int i=0;i<maxScrolls;i++) {
+			//Wait a bit for the scroll to happen
+			region.wait(0.5);
+			try {
+				patternFound = region.find(SikuliXFileDirectories.getImagesFolderPath()+"\\"+patternFilename);
+				return patternFound;
+			} catch (FindFailed e) {
+				System.out.println("Pattern not found. Continuing page scroll.");
+			}
+			//Use the Page Down key to scroll down
+			region.type(Key.PAGE_DOWN);
 		}
+		System.out.println("No pattern was found while scrolling. Returning default match object.");
+		return patternFound;
 	}
+	
+	
+	
+	
+	public static Match fillTextField(String textFieldLabel, String patternFilename, String value, Region region) {
+		Match match = retrieveTextField(textFieldLabel, patternFilename, region);
+		match.click();
+		region.type(value);
+		return match;
+	}
+	
+	public static Match retrieveTextField(String textFieldLabel, String patternFilename, Region region) {
+		Match fieldLabel = new Match();
+		try {
+			fieldLabel = region.findText(textFieldLabel);
+		} catch (FindFailed e) {
+			System.out.println("Text field was not found. Default match object will be returned.");
+			return fieldLabel;
+		}
+		Match textbox = SikuliXUtils.findClosestPatternToRegion(fieldLabel, patternFilename, region);
+		return textbox;
+	}
+	
 	
 	public static void multikey(String holdKey, String pressKey, Region region) {
 		region.keyDown(holdKey);
