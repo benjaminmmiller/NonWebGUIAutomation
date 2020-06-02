@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SWTBotTest
+Bundle-SymbolicName: SWTBot
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: SWTBotTest
+Require-Bundle: org.junit,
+ org.junit.jupiter.api,
+ org.eclipse.ui;bundle-version="3.116.0",
+ org.eclipse.core.runtime;bundle-version="3.17.100",
+ org.eclipse.swtbot.eclipse.finder;bundle-version="3.0.0",
+ org.eclipse.swtbot.junit4_x;bundle-version="3.0.0",
+ org.eclipse.swtbot.forms.finder;bundle-version="3.0.0",
+ org.hamcrest.library;bundle-version="1.3.0",
+ org.apache.log4j;bundle-version="1.2.15",
+ org.eclipse.ui.forms;bundle-version="3.9.0"
