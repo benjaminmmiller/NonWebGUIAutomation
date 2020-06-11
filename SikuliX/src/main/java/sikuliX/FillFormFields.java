@@ -26,15 +26,15 @@ public class FillFormFields {
 		OCR.globalOptions().fontSize(6);
 		Region wdRegion = SikuliXUtils.webDriverRegion(wd);
 		wdRegion.wait(1.5);
-		SikuliXUtils.fillTextField("First name:", "UltimateQATextbox.PNG", "John", wdRegion);
-		SikuliXUtils.fillTextField("First name:", "UltimateQATextbox.PNG", "Smith", wdRegion);
+		SikuliXControls.fillTextField("First name:", "UltimateQATextbox.PNG", "John", wdRegion);
+		SikuliXControls.fillTextField("First name:", "UltimateQATextbox.PNG", "Smith", wdRegion);
 		
 		try {
 			wdRegion.click(new Location(200,200));
 		} catch (FindFailed e) {
 		}
-		SikuliXUtils.scrollAndLookForText("Date:",3, wdRegion);
-		SikuliXUtils.fillTextField("Date:", "UltimateQATextbox.PNG", "05/02/2019", wdRegion);
+		SikuliXControls.scrollAndLookForText("Date:",3, wdRegion);
+		SikuliXControls.fillTextField("Date:", "UltimateQATextbox.PNG", "05/02/2019", wdRegion);
 	}
 	
 	@Test (enabled = true)
@@ -63,17 +63,17 @@ public class FillFormFields {
 	}
 	
 	public static void fillAllMercuryToursFieldsOnPage(Region region) {
-		SikuliXUtils.fillTextField("First Name:", "TextBox.PNG", "John", region);
-		SikuliXUtils.fillTextField("Last Name:", "TextBox.PNG", "Smith", region);
-		SikuliXUtils.fillTextField("Phone:", "TextBox.PNG", "987-654-3210", region);
-		SikuliXUtils.fillTextField("Email:", "TextBox.PNG", "thisisafakeemail@thisisafakedomain.ca", region);
-		SikuliXUtils.fillTextField("Address:", "TextBox.PNG", "12345 test road", region);
-		SikuliXUtils.fillTextField("City:", "TextBox.PNG", "Ottawa", region);
-		SikuliXUtils.fillTextField("Province:", "TextBox.PNG", "Ontario", region);
-		SikuliXUtils.fillTextField("Postal Code:", "TextBox.PNG", "B8J-9G5", region);
-		SikuliXUtils.fillTextField("User Name:", "TextBox.PNG", "User name", region);
-		SikuliXUtils.fillTextField("Password:", "TextBox.PNG","password", region);
-		SikuliXUtils.fillTextField("Confirm Password:", "TextBox.PNG", "password", region);
+		SikuliXControls.fillTextField("First Name:", "TextBox.PNG", "John", region);
+		SikuliXControls.fillTextField("Last Name:", "TextBox.PNG", "Smith", region);
+		SikuliXControls.fillTextField("Phone:", "TextBox.PNG", "987-654-3210", region);
+		SikuliXControls.fillTextField("Email:", "TextBox.PNG", "thisisafakeemail@thisisafakedomain.ca", region);
+		SikuliXControls.fillTextField("Address:", "TextBox.PNG", "12345 test road", region);
+		SikuliXControls.fillTextField("City:", "TextBox.PNG", "Ottawa", region);
+		SikuliXControls.fillTextField("Province:", "TextBox.PNG", "Ontario", region);
+		SikuliXControls.fillTextField("Postal Code:", "TextBox.PNG", "B8J-9G5", region);
+		SikuliXControls.fillTextField("User Name:", "TextBox.PNG", "User name", region);
+		SikuliXControls.fillTextField("Password:", "TextBox.PNG","password", region);
+		SikuliXControls.fillTextField("Confirm Password:", "TextBox.PNG", "password", region);
 	}
 	
 }
