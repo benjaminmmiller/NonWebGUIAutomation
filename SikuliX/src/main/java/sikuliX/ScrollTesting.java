@@ -23,7 +23,7 @@ public class ScrollTesting {
 		App word = new App("C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
 		word.open();
 		
-		SikuliXUtils.findAndClickRegionByText("Blank Document", word.window());
+		SikuliXControls.findAndClickRegionByText("Blank Document", word.window());
 		screen.wait(1.0);
 		
 		OCR.globalOptions().fontSize(3);
@@ -38,7 +38,7 @@ public class ScrollTesting {
 			word.window().type(Keys.ENTER);
 		}
 		
-		Match scrollMatch = SikuliXUtils.scrollAndLookForText("John Smith", 3, word.window());
+		Match scrollMatch = SikuliXControls.scrollAndLookForText("John Smith", 3, word.window());
 		scrollMatch.click();
 	}
 	

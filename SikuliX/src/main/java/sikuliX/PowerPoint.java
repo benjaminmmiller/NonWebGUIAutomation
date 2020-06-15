@@ -32,11 +32,11 @@ public class PowerPoint {
 		App powerpoint = new App("C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE");
 		powerpoint.open();
 		
-		SikuliXUtils.findAndClickRegionByText("Blank Presentation", powerpoint.window());
+		SikuliXControls.findAndClickRegionByText("Blank Presentation", powerpoint.window());
 		screen.wait(3.0);
 		
 		Match title = addPowerpointTitleText("Testing using SikuliX. This is the title.", powerpoint.window());
-		Match subTitle = SikuliXUtils.findAndClickRegionByText("Click to add subtitle", powerpoint.window());
+		Match subTitle = SikuliXControls.findAndClickRegionByText("Click to add subtitle", powerpoint.window());
 		subTitle.type("Testing using SikuliX. This is the subtitle.");
 		
 		newPowerpointSlide(powerpoint.window());
@@ -51,17 +51,17 @@ public class PowerPoint {
 		
 		addPowerpointTitleText("Image Slide", powerpoint.window());
 		
-		SikuliXUtils.findAndClickRegionByText("Click to add text", powerpoint.window());
+		SikuliXControls.findAndClickRegionByText("Click to add text", powerpoint.window());
 		insertPowerpointImage("checkmark.png", powerpoint.window());
 		exitPowerpoint(screen, powerpoint);
 	}
 	
 	public static void insertPowerpointImage(String fileName, Region region) {
-		SikuliXUtils.findAndClickRegionByText("Insert", region);
+		SikuliXControls.findAndClickRegionByText("Insert", region);
 		region.wait(0.5);
-		SikuliXUtils.findAndClickRegionByText("Pictures", region);
+		SikuliXControls.findAndClickRegionByText("Pictures", region);
 		region.wait(0.5);
-		SikuliXUtils.findAndClickRegionByText("This Device", region);
+		SikuliXControls.findAndClickRegionByText("This Device", region);
 		region.wait(0.5);
 		region.type(imagesFolderPath+"\\"+fileName);
 		region.type(Key.ENTER);
@@ -74,13 +74,13 @@ public class PowerPoint {
 	}
 	
 	public static Match addPowerpointTitleText(String text, Region region) {
-		Match title = SikuliXUtils.findAndClickRegionByText("Click to add title", region);
+		Match title = SikuliXControls.findAndClickRegionByText("Click to add title", region);
 		title.type(text);
 		return title;
 	}
 	
 	public static Match addPowerpointBodyText(String text, Region region) {
-		Match body = SikuliXUtils.findAndClickRegionByText("Click to add text", region);
+		Match body = SikuliXControls.findAndClickRegionByText("Click to add text", region);
 		body.type(text);
 		region.wait(1.0);
 		return body;

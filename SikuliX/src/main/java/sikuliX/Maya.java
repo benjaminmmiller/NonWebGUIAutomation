@@ -18,7 +18,7 @@ public class Maya {
 		App maya = new App("C:\\Program Files\\Autodesk\\Maya2018\\bin\\maya.exe");
 		maya.open();
 		
-		SikuliXUtils.waitForScreen("Maya.PNG", 60, screen);
+		SikuliXUtils.waitForScreenByImage("Maya.PNG", 60, screen);
 		
 	}
 

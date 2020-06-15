@@ -50,9 +50,9 @@ public class OCRTest {
 		
 		
 		
-		SikuliXUtils.findAndClickRegionByText("Blank document", word.window());
+		SikuliXControls.findAndClickRegionByText("Blank document", word.window());
 		word.window().wait(1.0);
-		SikuliXUtils.pasteText(testText, word.window());
+		SikuliXControls.pasteText(testText, word.window());
 		
 		word.window().mouseMove(word.window().getTopLeft());
 		//Get the text with default settings
@@ -66,11 +66,11 @@ public class OCRTest {
 		
 		
 		//Select the text and increase the font size.
-		SikuliXUtils.multikey(Key.CTRL, "a", word.window());
+		SikuliXControls.multikey(Key.CTRL, "a", word.window());
 		List<String> increaseSizeKeys= new ArrayList<String>();
 		Collections.addAll(increaseSizeKeys,Key.CTRL, Key.SHIFT);
 		for(int i =0;i<8;i++) {
-			SikuliXUtils.multikey(increaseSizeKeys, ">", word.window());
+			SikuliXControls.multikey(increaseSizeKeys, ">", word.window());
 		}
 		//Deselect the text
 		word.window().type(Key.RIGHT);
