@@ -82,10 +82,11 @@ public class Jubula {
 		//Switch to master details tab
 		MasterDetailsTab masterDetailsTab = messageManagerTab.switchToMasterDetailsTab(aut);
 		
-		//Select 
+		//Select cell in table
 		StandardControls.selectCellInTable(2, 1, masterDetailsTab.getModelObjectTable(), aut);
+		//Select radio
 		StandardControls.selectRadioBasedOnIndex(masterDetailsTab.getTypeOneDetailsRadioGroup(), 3, aut);
-		
+		//Fill text field
 		StandardControls.fillTextField(masterDetailsTab.getTextPropertyTextInput(), "Text property testing text", aut);
 	}
 	
