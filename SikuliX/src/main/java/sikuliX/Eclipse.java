@@ -28,15 +28,21 @@ public class Eclipse {
 			throw new RuntimeException("Application did not open");
 		}
 		
+		//Wait for homepage
 		SikuliXUtils.waitForScreenByImage("EclipseHomepage.png", 30, screen);
 	
+		//Find and click "FormEditor" in the menu
 		SikuliXControls.findAndClickRegionByImage("FormEditors.PNG", screen);
+		//Wait for dropdown menu to appear
+		SikuliXUtils.waitForScreenByText("Simple Form Editor", 15, screen);
+		//Find and click "Simple Form Editor" in the dropdown menu by text
 		SikuliXControls.findAndClickRegionByText("Simple Form Editor", eclipse.window());
 		
-		//TestingFrameworkFileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "EclipseHomePageText", screen.text());
-		
-		//Wait by screen
+	
+		//Wait for form editors screen
 		SikuliXUtils.waitForScreenByImage("EclipseEmptySimpleForm.PNG", 15, screen);
+		
+		OCR.globalOptions().fontSize(6);
 		
 		//Click checkboxes by text
 		SikuliXControls.findAndClickRegionByText("Add title", screen);
@@ -48,12 +54,10 @@ public class Eclipse {
 		SikuliXControls.findAndClickRegionByImage("EclipseWarningButton.PNG", screen);
 		SikuliXControls.findAndClickRegionByImage("EclipseCancelButton.png", screen);
 		
-		//Switch tab
+		//Switch to "Message Manager tab"
 		SikuliXControls.findAndClickRegionByImage("EclipseMessageManagerTab.PNG", screen);
 		
-		//SikuliXUtils.waitForScreenByText("", maxWaitTime, region)
-		
-		
+		OCR.globalOptions().fontSize(8);
 		SikuliXUtils.waitForScreenByText("Example with message handling", 15, screen);
 		
 		OCR.globalOptions().fontSize(5);
@@ -68,6 +72,8 @@ public class Eclipse {
 		SikuliXControls.findAndClickRegionByText("Add general error", screen);
 		SikuliXControls.findAndClickRegionByText("Add static message", screen);
 		SikuliXControls.findAndClickRegionByText("Auto update", screen);
+		
+		//TestingFrameworkFileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "EclipseHomePageText", screen.text());
 	}
 	
 }

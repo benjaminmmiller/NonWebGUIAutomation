@@ -27,5 +27,13 @@ public class SWTBotControls {
         syncExec(maximizeShell);
     }
 	
+	public static void delay(int timeInMillis) {
+		try {
+			Thread.sleep(timeInMillis);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }
