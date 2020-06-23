@@ -9,8 +9,8 @@ import org.eclipse.jubula.toolkit.concrete.components.TableComponent;
 import org.eclipse.jubula.toolkit.enums.ValueSets;
 import org.eclipse.jubula.toolkit.enums.ValueSets.InteractionMode;
 
-import jubula.JubulaUtils;
 import uiObjectModels.RadioGroup;
+import utils.JubulaUtils;
 
 
 
@@ -29,8 +29,7 @@ public class StandardControls {
 	}
 	
 	public static void fillTextField(TextInputComponent textField, String textToInput, AUT aut) {
-		aut.execute(textField.replaceText(textToInput), null);
-		
+		aut.execute(textField.replaceText(textToInput), null);		
 	}
 	
 	public static void setButton(ButtonComponent checkbox, boolean wantSelected, AUT aut) {
