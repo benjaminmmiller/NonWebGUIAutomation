@@ -1,23 +1,30 @@
-package jubula;
+package tests;
 
 import java.util.Locale;
 
 import org.eclipse.jubula.autagent.Embedded;
 import org.eclipse.jubula.client.AUT;
 import org.eclipse.jubula.client.AUTAgent;
+import org.eclipse.jubula.client.MakeR;
 import org.eclipse.jubula.client.launch.AUTConfiguration;
 import org.eclipse.jubula.rc.common.components.AUTHierarchy;
+import org.eclipse.jubula.rc.common.exception.ComponentNotManagedException;
 import org.eclipse.jubula.rc.swt.components.SwtAUTHierarchy;
 import org.eclipse.jubula.toolkit.base.components.ButtonComponent;
 import org.eclipse.jubula.toolkit.rcp.config.RCPAUTConfiguration;
 import org.eclipse.jubula.toolkit.swt.SwtComponents;
 import org.eclipse.jubula.tools.AUTIdentifier;
+import org.eclipse.jubula.tools.internal.exception.InvalidDataException;
+import org.eclipse.jubula.tools.internal.objects.ComponentIdentifier;
+import org.eclipse.jubula.tools.internal.objects.IComponentIdentifier;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import controls.AppControls;
 import controls.StandardControls;
+import customCAP.EclipseTabTester;
+import objectMaps.ObjectMaps;
 import pageObjectModels.MasterDetailsTab;
 import pageObjectModels.MessageManagerTab;
 import pageObjectModels.NewStyleTab;
@@ -49,7 +56,7 @@ public class Jubula {
 		}
 	}
 	
-	@Test (enabled = false)
+	@Test (enabled = true)
 	public static void jubulaAPITest(){
 		AppControls.navigateToMenuItem("Form Editors/Simple Form Editor", aut);
 		NewStyleTab newStyleTab = new NewStyleTab();
@@ -90,14 +97,16 @@ public class Jubula {
 		StandardControls.fillTextField(masterDetailsTab.getTextPropertyTextInput(), "Text property testing text", aut);
 	}
 	
-	@Test (enabled = true)
+	@Test (enabled = false)
 	public static void jubulaCustomUITest() {
 		
 		//https://github.com/eclipse/jubula.core/blob/507ab5acef07518d163118c5b7a450b01498767c/org.eclipse.jubula.rc.common/src/org/eclipse/jubula/rc/common/tester/AbstractUITester.java#L27
 		AppControls.navigateToMenuItem("Form Editors/Simple Form Editor", aut);
 		NewStyleTab newStyleTab = new NewStyleTab();
 		
-		ButtonComponent button = newStyleTab.getAddTitle();
+		System.out.println(EclipseTabTester.class.getCanonicalName());
+		
+		
 	}
 	
 	
