@@ -10,16 +10,20 @@ public class NewStyleTab extends SimpleFormEditorTab {
 	private ButtonComponent addTitle;
 	private ButtonComponent longTitle;
 	private ButtonComponent makeTitleTextSelectable;
+	private ButtonComponent addToolBar;
 	private ButtonComponent errorButton;
 	private ButtonComponent infoButton;
 	private ButtonComponent cancelButton;
 	private ButtonComponent startProgressButton;
 	private ButtonComponent warningButton;
+	private ButtonComponent addImage;
 
 	@SuppressWarnings("unchecked")
 	public NewStyleTab() {
 		addTitle = AbstractComponents.createButtonComponent(ObjectMaps.AddTitle);
 		longTitle = AbstractComponents.createButtonComponent(ObjectMaps.Button_LongTitle);
+		addImage = AbstractComponents.createButtonComponent(ObjectMaps.Button_AddImage);
+		addToolBar = AbstractComponents.createButtonComponent(ObjectMaps.Button_AddToolBar);
 		makeTitleTextSelectable = AbstractComponents.createButtonComponent(ObjectMaps.Button_MakeTitleTextSelectable);
 		errorButton = AbstractComponents.createButtonComponent(ObjectMaps.Button_Error);
 		infoButton = AbstractComponents.createButtonComponent(ObjectMaps.Button_Info);
@@ -61,4 +65,19 @@ public class NewStyleTab extends SimpleFormEditorTab {
 		return warningButton;
 	}
 	
+	public ButtonComponent getAddToolBar() {
+		return addToolBar;
+	}
+
+	public void setAddToolBar(ButtonComponent addToolBar) {
+		this.addToolBar = addToolBar;
+	}
+	
+	public ButtonComponent getAddImage() {
+		return addImage;
+	}
+
+	public void setAddImage(ButtonComponent addImage) {
+		this.addImage = addImage;
+	}
 }

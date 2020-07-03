@@ -30,7 +30,7 @@ import pageObjectModels.MessageManagerTab;
 import pageObjectModels.NewStyleTab;
 
 
-public class Jubula {
+public class JubulaModifiedFormHierarchyTest {
 
 	private static AUTAgent agent;
 	protected static AUT aut;
@@ -43,7 +43,7 @@ public class Jubula {
 				"Eclipse",
 				autID,
 				"eclipse.exe",
-				"D:\\WorkFromHome\\JubulaTest\\eclipse",
+				"D:\\WorkFromHome\\ModifiedFormsEclipse\\Order\\JubulaTest\\eclipse",
 				null,
 				Locale.US);
 		AUTIdentifier id = agent.startAUT(config);
@@ -76,7 +76,8 @@ public class Jubula {
 		StandardControls.clickButton(newStyleTab.getStartProgressButton(), aut);
 		
 		//Switch to message manager tab
-		MessageManagerTab messageManagerTab = newStyleTab.switchToMessageManagerTab(aut);
+		MessageManagerTab messageManagerTab = new MessageManagerTab();
+		aut.execute(messageManagerTab.getSimpleFormTabs().selectTabByIndex(8),null);
 		
 		//Fill text fields
 		StandardControls.fillTextField(messageManagerTab.getField1(), "Field 1 testing text", aut);
@@ -89,26 +90,28 @@ public class Jubula {
 		StandardControls.setButton(messageManagerTab.getAutoUpdate(), false, aut);
 		
 		//Switch to master details tab
-		MasterDetailsTab masterDetailsTab = messageManagerTab.switchToMasterDetailsTab(aut);
+		MasterDetailsTab masterDetailsTab = new MasterDetailsTab();
+		aut.execute(masterDetailsTab.getSimpleFormTabs().selectTabByIndex(2),null);
 		
 		//Select cell in table
 		StandardControls.selectCellInTable(2, 1, masterDetailsTab.getModelObjectTable(), aut);
 		//Select radio
+		StandardControls.selectRadioBasedOnIndex(masterDetailsTab.getTypeOneDetailsRadioGroup(), 0, aut);
+		StandardControls.selectRadioBasedOnIndex(masterDetailsTab.getTypeOneDetailsRadioGroup(), 1, aut);
+		StandardControls.selectRadioBasedOnIndex(masterDetailsTab.getTypeOneDetailsRadioGroup(), 2, aut);
 		StandardControls.selectRadioBasedOnIndex(masterDetailsTab.getTypeOneDetailsRadioGroup(), 3, aut);
+		
 		//Fill text field
 		StandardControls.fillTextField(masterDetailsTab.getTextPropertyTextInput(), "Text property testing text", aut);
 	}
 	
 	@Test (enabled = false)
 	public static void jubulaCustomUITest() {
-		
 		//https://github.com/eclipse/jubula.core/blob/507ab5acef07518d163118c5b7a450b01498767c/org.eclipse.jubula.rc.common/src/org/eclipse/jubula/rc/common/tester/AbstractUITester.java#L27
 		AppControls.navigateToMenuItem("Form Editors/Simple Form Editor", aut);
 		NewStyleTab newStyleTab = new NewStyleTab();
 		
 		System.out.println(EclipseTabTester.class.getCanonicalName());
-		
-		
 	}
 	
 	
