@@ -7,7 +7,7 @@ import org.eclipse.jubula.toolkit.base.components.ButtonComponent;
 import org.eclipse.jubula.toolkit.enums.ValueSets.InteractionMode;
 
 import controls.StandardControls;
-import jubula.JubulaUtils;
+import utils.JubulaUtils;
 
 public class RadioGroup {
 

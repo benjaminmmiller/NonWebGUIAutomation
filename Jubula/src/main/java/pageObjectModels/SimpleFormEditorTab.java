@@ -8,7 +8,7 @@ import org.eclipse.jubula.toolkit.enums.ValueSets.InteractionMode;
 
 import objectMaps.ObjectMaps;
 
-public class SimpleFormEditorTab extends BaseRCPPage{
+public class SimpleFormEditorTab extends BaseMainTabItem{
 	
 	private TabComponent simpleFormTabs;
 	
