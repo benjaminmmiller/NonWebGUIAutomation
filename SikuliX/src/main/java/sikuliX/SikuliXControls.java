@@ -1,5 +1,6 @@
 package sikuliX;
 
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -8,7 +9,9 @@ import java.util.List;
 import org.sikuli.hotkey.Keys;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
+import org.sikuli.script.Location;
 import org.sikuli.script.Match;
+import org.sikuli.script.Mouse;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
 
@@ -129,5 +132,84 @@ public class SikuliXControls {
 		region.type(value);
 		return match;
 	}
+	
+	
+	public static Match waitForAndClickRegionByImage(String image, int maxWaitInSeconds, Region region) {
+		SikuliXUtils.waitForScreenByImage(image, maxWaitInSeconds, region);
+		return SikuliXControls.findAndClickRegionByImage(image, region);
+	}
+	
+	public static Match waitForAndClickRegionByText(String text, int maxWaitInSeconds, Region region) {
+		SikuliXUtils.waitForScreenByText(text, maxWaitInSeconds, region);
+		return SikuliXControls.findAndClickRegionByText(text, region);
+	}
 
+	
+	public static Match findTextWithOffset(String text, Region region, Point offset) {
+		Match match = new Match();
+		try {
+			match = region.findText(text);
+			region.mouseMove(new Location(match.x+offset.x,match.y+offset.y));
+		}
+		catch (FindFailed e) {
+			e.printStackTrace();
+		}
+		return match;
+	}
+	
+	
+	public static Match findImageWithOffset(String imageName, Region region, Point offset) {
+		Match match = new Match();
+		try {
+			match = region.find(imageName);
+			region.mouseMove(new Location(match.x+offset.x,match.y+offset.y));
+		}
+		catch (FindFailed e) {
+			e.printStackTrace();
+		}
+		return match;
+	}
+	
+	public static Match scrollUntilTextIsTop(String text, int maxNumberOfScrollsSteps, int scrollStepSize, int minDistanceFromTop, Region region, boolean scrollFromTop) {
+		boolean textWasFound = false;
+		boolean textScrolledOff = false;
+		if(scrollFromTop) {
+			region.type(Key.HOME);
+		}
+		try {
+			region.mouseMove(region);
+		} catch (FindFailed e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Match textFound = new Match();
+		for(int i=0;i<maxNumberOfScrollsSteps;i++) {
+			try {
+				textFound = region.findText(text);
+				textWasFound=true;
+				int distance = textFound.y-region.y;
+				System.out.println("Text was found. Scrolling until text is at top of the screen");
+				if(distance<minDistanceFromTop) {
+					return textFound;
+				}
+				if(textScrolledOff) {
+					return textFound;
+				}
+			} catch (FindFailed e) {
+				if(textWasFound) {
+					System.out.println("Scrolled the found text off the page, due to the scroll step and minDistanceFromTop ratio."
+							+ "Scrolling up until text is back on screen");
+					textScrolledOff = true;
+					Mouse.wheel(Mouse.WHEEL_UP,2);
+				}
+				else {
+					System.out.println("Pattern not found. Continuing page scroll.");
+				}
+			}
+			if(!textScrolledOff) {
+				Mouse.wheel(Mouse.WHEEL_DOWN, scrollStepSize);
+			}
+		}
+		return textFound;
+	}
 }
