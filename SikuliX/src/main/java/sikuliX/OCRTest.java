@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.sikuli.basics.Settings;
 import org.sikuli.script.App;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
 import org.sikuli.script.OCR;
-import org.sikuli.script.Screen;
 import org.testng.annotations.Test;
-import org.sikuli.basics.Settings;
 
-import utils.TestingFrameworkFileUtils;
+import utils.FileUtils;
 
 public class OCRTest {
 	private final static String dummyParagraphEN = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.";
@@ -56,11 +55,11 @@ public class OCRTest {
 		
 		word.window().mouseMove(word.window().getTopLeft());
 		//Get the text with default settings
-		TestingFrameworkFileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "SmallText-Default", word.window().text());
+		FileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "SmallText-Default", word.window().text());
 	
 		//Get the text with modifying the font size
 		OCR.globalOptions().fontSize(12);
-		TestingFrameworkFileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "SmallText-Size12", word.window().text());
+		FileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "SmallText-Size12", word.window().text());
 		
 		//Reset back to default
 		
@@ -76,11 +75,11 @@ public class OCRTest {
 		word.window().type(Key.RIGHT);
 		
 		//Get the text with default OCR settings
-		TestingFrameworkFileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "BigText-Default", word.window().text());
+		FileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "BigText-Default", word.window().text());
 		
 		//Get the text with font size adjusted
 		OCR.globalOptions().fontSize(26);
-		TestingFrameworkFileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "BigText-Size26", word.window().text());
+		FileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "BigText-Size26", word.window().text());
 	}
 
 }

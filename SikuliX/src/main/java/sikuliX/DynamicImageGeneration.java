@@ -9,14 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Location;
-import org.sikuli.script.Match;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
-import org.testng.TestNG;
 import org.testng.annotations.Test;
 
-import imageGeneration.DynamicImage;
+import dynamicImages.DynamicImage;
 
 public class DynamicImageGeneration {
 

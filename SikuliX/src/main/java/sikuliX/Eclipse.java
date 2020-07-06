@@ -1,14 +1,10 @@
 package sikuliX;
 
 import org.sikuli.script.App;
-import org.sikuli.script.FindFailed;
 import org.sikuli.script.OCR;
-import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import utils.TestingFrameworkFileUtils;
 
 public class Eclipse {
 

@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.sikuli.script.App;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Location;
 import org.sikuli.script.Match;
@@ -20,7 +18,6 @@ import org.sikuli.script.Screen;
 import org.sikuli.script.ScreenImage;
 
 import utils.MiscUtils;
-import utils.TestingFrameworkFileUtils;
 
 public class SikuliXUtils {
 	

@@ -1,29 +1,29 @@
 package sikuliX;
 
-import utils.TestingFrameworkFileUtils;
+import utils.FileUtils;
 
 public class SikuliXFileDirectories {
-	private final static String imagesFolderPath = TestingFrameworkFileUtils.getProjectFilePath() +"\\src\\main\\resources\\images";
-	private final static String outputImagePath = TestingFrameworkFileUtils.getProjectFilePath() + "\\test-output\\screenshots";
-	private final static String outputDynamicImagePath = TestingFrameworkFileUtils.getProjectFilePath() + "\\src\\main\\resources\\dynamic-images";
-	private final static String outputTextPath = TestingFrameworkFileUtils.getProjectFilePath() + "\\test-output\\textFiles";
+	private final static String imagesFolderPath = FileUtils.getProjectFilePath() +"\\src\\main\\resources\\images";
+	private final static String outputImagePath = FileUtils.getProjectFilePath() + "\\test-output\\screenshots";
+	private final static String outputDynamicImagePath = FileUtils.getProjectFilePath() + "\\src\\main\\resources\\dynamic-images";
+	private final static String outputTextPath = FileUtils.getProjectFilePath() + "\\test-output\\textFiles";
 	
 	
 	
 	public static String getImagesFolderPath() {
-		TestingFrameworkFileUtils.createDirectory(imagesFolderPath, false);
+		FileUtils.createDirectory(imagesFolderPath, false);
 		return imagesFolderPath;
 	}
 	public static String getOutputImagePath() {
-		TestingFrameworkFileUtils.createDirectory(outputImagePath, false);
+		FileUtils.createDirectory(outputImagePath, false);
 		return outputImagePath;
 	}
 	public static String getOutputDynamicImagePath() {
-		TestingFrameworkFileUtils.createDirectory(outputDynamicImagePath, false);
+		FileUtils.createDirectory(outputDynamicImagePath, false);
 		return outputDynamicImagePath;
 	}
 	public static String getOutputTextPath() {
-		TestingFrameworkFileUtils.createDirectory(outputTextPath, false);
+		FileUtils.createDirectory(outputTextPath, false);
 		return outputTextPath;
 	}
 	

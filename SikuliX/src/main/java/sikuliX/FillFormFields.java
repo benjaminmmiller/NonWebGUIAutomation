@@ -10,8 +10,6 @@ import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
 import org.testng.annotations.Test;
 
-import utils.TestingFrameworkFileUtils;
-
 public class FillFormFields {
 	
 	

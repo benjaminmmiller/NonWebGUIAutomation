@@ -1,25 +1,21 @@
 package sikuliX;
 
+import org.sikuli.basics.Settings;
 import org.sikuli.script.App;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
 import org.sikuli.script.Match;
 import org.sikuli.script.OCR;
-import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
-import org.sikuli.script.ScreenImage;
 
-import static org.testng.Assert.ARRAY_MISMATCH_TEMPLATE;
-import static org.testng.Assert.assertTrue;
+import utils.FileUtils;
 
-import org.sikuli.basics.Settings;
 
-import utils.TestingFrameworkFileUtils;
 
 public class PowerPoint {
-	final static String screenshotDir = TestingFrameworkFileUtils.getProjectFilePath() +"\\test-output\\screenshots";
-	final static String imagesFolderPath = TestingFrameworkFileUtils.getProjectFilePath() +"\\src\\main\\resources\\images";
+	final static String screenshotDir = FileUtils.getProjectFilePath() +"\\test-output\\screenshots";
+	final static String imagesFolderPath = FileUtils.getProjectFilePath() +"\\src\\main\\resources\\images";
 	
 	public static void main(String[] args) throws FindFailed, InterruptedException {
 		OCR.globalOptions().oem(OCR.OEM.LSTM_ONLY);
