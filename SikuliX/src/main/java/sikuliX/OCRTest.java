@@ -49,7 +49,7 @@ public class OCRTest {
 		
 		
 		
-		SikuliXControls.findAndClickRegionByText("Blank document", word.window());
+		SikuliXFinders.findAndClickRegionByText("Blank document", word.window());
 		word.window().wait(1.0);
 		SikuliXControls.pasteText(testText, word.window());
 		

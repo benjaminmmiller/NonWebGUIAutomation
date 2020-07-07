@@ -26,5 +26,4 @@ public class SikuliXFileDirectories {
 		FileUtils.createDirectory(outputTextPath, false);
 		return outputTextPath;
 	}
-	
 }

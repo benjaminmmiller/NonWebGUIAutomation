@@ -2,8 +2,11 @@ package sikuliX;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.Point;
@@ -27,17 +30,25 @@ public class SikuliXUtils {
 		System.out.println("Screenshot has been taken and saved to: "+SikuliXFileDirectories.getOutputImagePath());
 	}
 	
-	public static List<Match> findAllMatchesforPattern(String patternImage, Region region){
-		Pattern pattern = new Pattern(SikuliXFileDirectories.getImagesFolderPath()+"\\"+patternImage);
-		List <Match> matches = new ArrayList<Match>();
-		try {
-			Iterator<Match> matchesFound = region.findAll(pattern);
-			matches = MiscUtils.iteratorToList(matchesFound);
-		} catch (FindFailed e) {
-			System.out.println("No matches were found for pattern. Returning empty list.");
-			e.printStackTrace();
+	public static void highlightAllMatchesForPattern(String imageFilename, Region region) {
+		List<Match> matches = SikuliXFinders.findAllMatchesforPattern(imageFilename, region);
+		int color = 0;
+		for(Match m:matches) {
+			System.out.println("Match Score: "+m.getScore());
+			if(color==0) {
+				m.highlight("red");
+			}
+			else if(color==1) {
+				m.highlight("green");
+			}
+			else {
+				m.highlight("blue");
+			}
+			color++;
+			if(color>2) {
+				color=0;
+			}
 		}
-		return matches;
 	}
 	
 	public static boolean textExistsInWindow(String text, Region region) {
@@ -85,26 +96,6 @@ public class SikuliXUtils {
 	}
 	
 
-	public static Match findClosestPatternToRegion(Region region, String imageName, Region screenOrAppRegion) {
-		Match closestMatch = new Match();
-		List<Match> matches = findAllMatchesforPattern(imageName, screenOrAppRegion);
-		Location regionLocation = region.getCenter();
-		for(int i=0;i<matches.size();i++) {
-			if(i==0) {
-				closestMatch = matches.get(i);
-			}
-			else {
-				int distanceFound = SikuliXUtils.getDistanceBetweenLocations(regionLocation, matches.get(i).getCenter());
-				int closestDistance = SikuliXUtils.getDistanceBetweenLocations(regionLocation, closestMatch.getCenter());
-				if(distanceFound<closestDistance) {
-					closestMatch=matches.get(i);
-				}
-			}
-		}
-		return closestMatch;
-	}
-	
-	
 	/**
 	 * Returns the distance between two SikuliX locations as an int
 	 * Uses generic getDistancesBetweenPoints method
@@ -143,7 +134,20 @@ public class SikuliXUtils {
 			System.out.println("Text field label was not found. Default match object will be returned.");
 			return fieldLabel;
 		}
-		Match textbox = SikuliXUtils.findClosestPatternToRegion(fieldLabel, patternFilename, region);
+		Match textbox = SikuliXFinders.findClosestPatternToRegion(fieldLabel, patternFilename, region);
 		return textbox;
+	}
+	
+	public static String getClipboardText() {
+		Clipboard clipboard=Toolkit.getDefaultToolkit().getSystemClipboard();
+		String clipboardText = "";
+        try {
+			clipboardText = (String) clipboard.getData(DataFlavor.stringFlavor);
+		} catch (UnsupportedFlavorException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        return clipboardText;
 	}
 }

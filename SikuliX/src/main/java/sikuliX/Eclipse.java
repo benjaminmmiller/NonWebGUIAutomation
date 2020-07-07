@@ -28,11 +28,11 @@ public class Eclipse {
 		SikuliXUtils.waitForScreenByImage("EclipseHomepage.png", 30, screen);
 	
 		//Find and click "FormEditor" in the menu
-		SikuliXControls.findAndClickRegionByImage("FormEditors.PNG", screen);
+		SikuliXFinders.findAndClickRegionByImage("FormEditors.PNG", screen);
 		//Wait for dropdown menu to appear
 		SikuliXUtils.waitForScreenByText("Simple Form Editor", 15, screen);
 		//Find and click "Simple Form Editor" in the dropdown menu by text
-		SikuliXControls.findAndClickRegionByText("Simple Form Editor", eclipse.window());
+		SikuliXFinders.findAndClickRegionByText("Simple Form Editor", eclipse.window());
 		
 	
 		//Wait for form editors screen
@@ -41,17 +41,17 @@ public class Eclipse {
 		OCR.globalOptions().fontSize(6);
 		
 		//Click checkboxes by text
-		SikuliXControls.findAndClickRegionByText("Add title", screen);
-		SikuliXControls.findAndClickRegionByText("Add image", screen);
-		SikuliXControls.findAndClickRegionByText("Add tool bar", screen);
+		SikuliXFinders.findAndClickRegionByText("Add title", screen);
+		SikuliXFinders.findAndClickRegionByText("Add image", screen);
+		SikuliXFinders.findAndClickRegionByText("Add tool bar", screen);
 		
 		//Click buttons by image
-		SikuliXControls.findAndClickRegionByImage("EclipseErrorButton.PNG", screen);
-		SikuliXControls.findAndClickRegionByImage("EclipseWarningButton.PNG", screen);
-		SikuliXControls.findAndClickRegionByImage("EclipseCancelButton.png", screen);
+		SikuliXFinders.findAndClickRegionByImage("EclipseErrorButton.PNG", screen);
+		SikuliXFinders.findAndClickRegionByImage("EclipseWarningButton.PNG", screen);
+		SikuliXFinders.findAndClickRegionByImage("EclipseCancelButton.png", screen);
 		
 		//Switch to "Message Manager tab"
-		SikuliXControls.findAndClickRegionByImage("EclipseMessageManagerTab.PNG", screen);
+		SikuliXFinders.findAndClickRegionByImage("EclipseMessageManagerTab.PNG", screen);
 		
 		OCR.globalOptions().fontSize(8);
 		SikuliXUtils.waitForScreenByText("Example with message handling", 15, screen);
@@ -65,9 +65,9 @@ public class Eclipse {
 		SikuliXControls.fillTextField("Field3", "EclipseTextField.PNG", "Field 3 text", screen);
 		
 		//Click checkboxes
-		SikuliXControls.findAndClickRegionByText("Add general error", screen);
-		SikuliXControls.findAndClickRegionByText("Add static message", screen);
-		SikuliXControls.findAndClickRegionByText("Auto update", screen);
+		SikuliXFinders.findAndClickRegionByText("Add general error", screen);
+		SikuliXFinders.findAndClickRegionByText("Add static message", screen);
+		SikuliXFinders.findAndClickRegionByText("Auto update", screen);
 		
 		//TestingFrameworkFileUtils.createAndWriteToTextFile(SikuliXFileDirectories.getOutputTextPath(), "EclipseHomePageText", screen.text());
 	}

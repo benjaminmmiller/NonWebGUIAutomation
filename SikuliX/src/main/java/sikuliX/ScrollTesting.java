@@ -20,7 +20,7 @@ public class ScrollTesting {
 		App word = new App("C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
 		word.open();
 		
-		SikuliXControls.findAndClickRegionByText("Blank Document", word.window());
+		SikuliXFinders.findAndClickRegionByText("Blank Document", word.window());
 		screen.wait(1.0);
 		
 		OCR.globalOptions().fontSize(3);

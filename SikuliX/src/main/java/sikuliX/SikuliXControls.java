@@ -3,7 +3,10 @@ package sikuliX;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.List;
 
 import org.sikuli.hotkey.Keys;
@@ -14,6 +17,8 @@ import org.sikuli.script.Match;
 import org.sikuli.script.Mouse;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
+
+import utils.MiscUtils;
 
 public class SikuliXControls {
 
@@ -26,29 +31,6 @@ public class SikuliXControls {
 			e.printStackTrace();
 		}
 		return fieldPattern;
-	}
-
-	public static Match findAndClickRegionByText(String text, Region region) {
-		Match match = new Match();
-		try {
-			match = region.findText(text);
-			region.click(match);
-		} catch (FindFailed e) {
-			e.printStackTrace();
-		}
-		return match;
-	}
-	
-	
-	public static Match findAndClickRegionByImage(String imageName, Region region) {
-		Match match = new Match();
-		try {
-			match = region.find(SikuliXFileDirectories.getImagesFolderPath()+"\\"+imageName);
-			region.click(match);
-		} catch (FindFailed e) {
-			e.printStackTrace();
-		}
-		return match;
 	}
 
 	public static void maximizeWindowsWindow(Region region) {
@@ -136,27 +118,14 @@ public class SikuliXControls {
 	
 	public static Match waitForAndClickRegionByImage(String image, int maxWaitInSeconds, Region region) {
 		SikuliXUtils.waitForScreenByImage(image, maxWaitInSeconds, region);
-		return SikuliXControls.findAndClickRegionByImage(image, region);
+		return SikuliXFinders.findAndClickRegionByImage(image, region);
 	}
 	
 	public static Match waitForAndClickRegionByText(String text, int maxWaitInSeconds, Region region) {
 		SikuliXUtils.waitForScreenByText(text, maxWaitInSeconds, region);
-		return SikuliXControls.findAndClickRegionByText(text, region);
+		return SikuliXFinders.findAndClickRegionByText(text, region);
 	}
 
-	
-	public static Match findTextWithOffset(String text, Region region, Point offset) {
-		Match match = new Match();
-		try {
-			match = region.findText(text);
-			region.mouseMove(new Location(match.x+offset.x,match.y+offset.y));
-		}
-		catch (FindFailed e) {
-			e.printStackTrace();
-		}
-		return match;
-	}
-	
 	
 	public static Match findImageWithOffset(String imageName, Region region, Point offset) {
 		Match match = new Match();
@@ -170,10 +139,41 @@ public class SikuliXControls {
 		return match;
 	}
 	
+	
+	public static String getSelectedTextFromClipboard(Region region) {
+		SikuliXControls.multikey(Key.CTRL, "c", region);
+		MiscUtils.delay(200);
+		return SikuliXUtils.getClipboardText();
+	}
+	
+	
+	public static boolean verifyClipboardText(Region region, String expectedText) {
+        if(getSelectedTextFromClipboard(region).equals(expectedText)) {
+        	return true;
+        }
+        else {
+        	return false;
+        }
+	}
+	
+	
+	public static void moveMouseToSide(Region region) {
+		try {
+			region.mouseMove(new Location(region.w/15, region.h/2));
+			MiscUtils.delay(200);
+			region.click(Mouse.at());
+			MiscUtils.delay(200);
+		} catch (FindFailed e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static Match scrollUntilTextIsTop(String text, int maxNumberOfScrollsSteps, int scrollStepSize, int minDistanceFromTop, Region region, boolean scrollFromTop) {
 		boolean textWasFound = false;
 		boolean textScrolledOff = false;
 		if(scrollFromTop) {
+			moveMouseToSide(region);
 			region.type(Key.HOME);
 		}
 		try {
