@@ -31,7 +31,7 @@ public class FillFormFields {
 			wdRegion.click(new Location(200,200));
 		} catch (FindFailed e) {
 		}
-		SikuliXControls.scrollAndLookForText("Date:",3, wdRegion);
+		SikuliXControls.scrollAndLookForText("Date:",3, true, wdRegion);
 		SikuliXControls.fillTextField("Date:", "UltimateQATextbox.PNG", "05/02/2019", wdRegion);
 	}
 	

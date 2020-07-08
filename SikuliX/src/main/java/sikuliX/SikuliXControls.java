@@ -39,12 +39,12 @@ public class SikuliXControls {
 		region.keyUp(Key.WIN);
 	}
 
-	public static Match scrollAndLookForText(String searchForText, int maxScrolls, Region region) {
-		//Using CTRL+HOME to go to the top of the page
-		region.keyDown(Keys.CTRL);
-		region.type(Key.HOME);
-		region.keyUp(Keys.CTRL);
-		
+	public static Match scrollAndLookForText(String searchForText, int maxScrolls, boolean scrollFromTop, Region region) {
+		moveMouseToSide(region);
+		if(scrollFromTop) {
+			//Using HOME to go to the top of the page
+			region.type(Key.HOME);
+		}
 		Match textFound = new Match();
 		for(int i=0;i<maxScrolls;i++) {
 			//Wait a bit for the scroll to happen
@@ -169,6 +169,7 @@ public class SikuliXControls {
 		}
 	}
 	
+
 	public static Match scrollUntilTextIsTop(String text, int maxNumberOfScrollsSteps, int scrollStepSize, int minDistanceFromTop, Region region, boolean scrollFromTop) {
 		boolean textWasFound = false;
 		boolean textScrolledOff = false;

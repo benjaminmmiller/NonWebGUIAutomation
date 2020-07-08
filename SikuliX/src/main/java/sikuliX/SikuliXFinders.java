@@ -10,6 +10,8 @@ import org.sikuli.script.Location;
 import org.sikuli.script.Match;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
+import org.sikuli.basics.Settings;
+
 
 import utils.MiscUtils;
 
@@ -84,7 +86,34 @@ public class SikuliXFinders {
 		if(!matches.isEmpty()) {
 			closestMatch = matches.get(0);
 			for(Match match:matches) {
-				if(match.getScore()>MIN_SCORE) {
+				int currentMatchDistanceFromTop = match.y-region.y;
+				int closestMatchDistanceFromTop = closestMatch.y-region.y;
+				if(currentMatchDistanceFromTop<closestMatchDistanceFromTop) {
+					closestMatch = match;
+				}
+			}
+		}
+		else {
+			System.out.println("No matches for given pattern was found. Returning default match object.");
+		}
+		if(HIGHLIGHT_MATCHES) {
+			closestMatch.highlight(HIGHLIGHT_COLOR);
+		}
+		return closestMatch;
+	}
+	
+	
+	public static Match findFirstMatch(String patternImage, double minScore, Region region) {
+		double minSimilarity = Settings.MinSimilarity;
+		if(minScore<minSimilarity) {
+			Settings.MinSimilarity = minScore;
+		}
+		List<Match> matches = findAllMatchesforPattern(patternImage, region);
+		Match closestMatch = new Match();
+		if(!matches.isEmpty()) {
+			closestMatch = matches.get(0);
+			for(Match match:matches) {
+				if(match.getScore()>minScore) {
 					int currentMatchDistanceFromTop = match.y-region.y;
 					int closestMatchDistanceFromTop = closestMatch.y-region.y;
 					if(currentMatchDistanceFromTop<closestMatchDistanceFromTop) {
@@ -99,9 +128,12 @@ public class SikuliXFinders {
 		if(HIGHLIGHT_MATCHES) {
 			closestMatch.highlight(HIGHLIGHT_COLOR);
 		}
+		if(minScore==Settings.MinSimilarity) {
+			Settings.MinSimilarity = minSimilarity;
+		}
 		return closestMatch;
 	}
-
+	
 	public static Match findClosestPatternToRegion(Region region, String imageName, Region screenOrAppRegion) {
 		Match closestMatch = new Match();
 		List<Match> matches = findAllMatchesforPattern(imageName, screenOrAppRegion);
