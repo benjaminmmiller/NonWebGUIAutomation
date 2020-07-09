@@ -5,6 +5,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.List;
@@ -149,5 +150,10 @@ public class SikuliXUtils {
 			e.printStackTrace();
 		}
         return clipboardText;
+	}
+	
+	public static void clearClipboardContent() {
+		Clipboard clipboard=Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(new StringSelection(""), null);
 	}
 }

@@ -141,6 +141,7 @@ public class SikuliXControls {
 	
 	
 	public static String getSelectedTextFromClipboard(Region region) {
+		SikuliXUtils.clearClipboardContent();
 		SikuliXControls.multikey(Key.CTRL, "c", region);
 		MiscUtils.delay(200);
 		return SikuliXUtils.getClipboardText();
@@ -176,12 +177,6 @@ public class SikuliXControls {
 		if(scrollFromTop) {
 			moveMouseToSide(region);
 			region.type(Key.HOME);
-		}
-		try {
-			region.mouseMove(region);
-		} catch (FindFailed e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 		Match textFound = new Match();
 		for(int i=0;i<maxNumberOfScrollsSteps;i++) {
